@@ -1,0 +1,19 @@
+#! /usr/bin/env ruby
+
+require "scrummin"
+
+people = ARGV.map { |a| Scrummin::Person.new(a) }
+meeting = Scrummin::Meeting.new(participants: people)
+
+puts "starting meeting with: #{meeting.participants.map(&:name).join(', ')}"
+puts "commands: (n)ext (q)uit"
+
+while meeting.active?
+  print "> "
+  case $stdin.gets.chomp
+  when "n", "next"
+    puts meeting.next.name
+  when "q", "quit"
+    exit 1
+  end
+end
