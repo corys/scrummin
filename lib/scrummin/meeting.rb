@@ -25,7 +25,9 @@ module Scrummin
 
     def next
       start unless active?
+      current.ended_at = Time.now if current
       @position += 1
+      current.started_at = Time.now if current
       current
     end
 

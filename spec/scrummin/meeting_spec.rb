@@ -1,9 +1,10 @@
 require "spec_helper"
+require "time"
 
 module Scrummin
   describe Meeting do
-    let(:bob) { stub name: "bob" }
-    let(:sally) { stub name: "sally" }
+    let(:bob) { Person.new("bob") }
+    let(:sally) { Person.new("sally") }
 
     it "can be created with participants" do
       people = [bob, sally]
@@ -54,6 +55,18 @@ module Scrummin
       meeting.next
       meeting.next
       meeting.should be_over
+    end
+
+    it "tracks participant time" do
+      meeting = Meeting.new(participants: [sally])
+      started = Time.parse("1986-01-28 16:36:45 UTC")
+      ended = Time.parse("1986-01-28 16:38:00 UTC")
+      Time.stub(now: started)
+      meeting.next
+      Time.stub(now: ended)
+      meeting.next
+      sally.started_at.should == started
+      sally.ended_at.should == ended
     end
   end
 end

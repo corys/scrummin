@@ -23,3 +23,9 @@ while meeting.active?
     exit 1
   end
 end
+
+puts
+
+meeting.participants.each do |participant|
+  puts "#{participant.name}: #{participant.duration}s"
+end

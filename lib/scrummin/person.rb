@@ -1,6 +1,7 @@
 module Scrummin
   class Person
     attr_reader :name
+    attr_accessor :started_at, :ended_at
 
     def initialize(name)
       if name.nil? || name.strip == ""
@@ -8,6 +9,12 @@ module Scrummin
       end
 
       @name = name
+    end
+
+    def duration
+      if started_at && ended_at
+        ended_at - started_at
+      end
     end
   end
 end
