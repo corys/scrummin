@@ -2,8 +2,8 @@ require "spec_helper"
 
 module Scrummin
   describe Meeting do
-    let(:bob) { stub }
-    let(:sally) { stub }
+    let(:bob) { stub name: "bob" }
+    let(:sally) { stub name: "sally" }
 
     it "can be created with participants" do
       people = [bob, sally]
@@ -37,9 +37,10 @@ module Scrummin
 
     it "can move to next participant" do
       meeting = Meeting.new(participants: [sally, bob])
-      first = meeting.participants.first
+      first = meeting.participants[0]
+      second = meeting.participants[1]
       meeting.next.should == first
-      meeting.participants.should_not include first
+      meeting.next.should == second
     end
 
     it "is active is participants remain" do
@@ -50,6 +51,7 @@ module Scrummin
 
     it "is over when no more participants" do
       meeting = Meeting.new(participants: [sally])
+      meeting.next
       meeting.next
       meeting.should be_over
     end

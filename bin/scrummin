@@ -5,14 +5,20 @@ require "scrummin"
 people = ARGV.map { |a| Scrummin::Person.new(a) }
 meeting = Scrummin::Meeting.new(participants: people)
 
-puts "starting meeting with: #{meeting.participants.map(&:name).join(', ')}"
+puts "starting meeting with: #{meeting.participants.map(&:name).sort.join(', ')}"
 puts "commands: (n)ext (q)uit"
+
+meeting.start
 
 while meeting.active?
   print "> "
   case $stdin.gets.chomp
   when "n", "next"
-    puts meeting.next.name
+    if person = meeting.next
+      puts person.name
+    else
+      puts "done"
+    end
   when "q", "quit"
     exit 1
   end

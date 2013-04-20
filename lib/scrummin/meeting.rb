@@ -2,22 +2,36 @@ require "forwardable"
 
 module Scrummin
   class Meeting
-    attr_reader :participants
+    attr_reader :participants, :position
 
     def initialize(participants: [])
-      @participants = participants.shuffle
+      @participants = participants
     end
 
     extend Forwardable
     def_delegators :participants, :<<, :delete, :delete_at
-    def_delegator :participants, :shift, :next
 
     def active?
-      participants.any?
+      position && position < participants.size
     end
 
     def over?
-      participants.empty?
+      !active?
+    end
+
+    def current
+      participants[position]
+    end
+
+    def next
+      start unless active?
+      @position += 1
+      current
+    end
+
+    def start
+      @position = -1
+      @participants.shuffle
     end
   end
 end
