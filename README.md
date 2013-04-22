@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 ### Dependencies
 
-* [Ruby](http://www.ruby-lang.org/)
+* [Ruby 2.0](http://www.ruby-lang.org/)
 * [Bundler](http://gembundler.com/)
 
 In the project directory, run
