@@ -4,8 +4,14 @@ TODO: Write a gem description
 
 ## Installation
 
+### Dependencies
+
+* [Ruby](http://www.ruby-lang.org/)
+* [Bundler](http://gembundler.com/)
+
 In the project directory, run
 
+    $ bundle install
     $ rake install
 
 This will add an executable to your path called *scrummin*
