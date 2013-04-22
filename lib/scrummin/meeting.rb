@@ -5,7 +5,7 @@ module Scrummin
     attr_reader :participants, :position
 
     def initialize(participants: [])
-      @participants = participants
+      @participants = participants.shuffle
     end
 
     extend Forwardable
