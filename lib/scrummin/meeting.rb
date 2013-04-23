@@ -4,8 +4,9 @@ module Scrummin
   class Meeting
     attr_reader :participants, :position
 
-    def initialize(participants: [])
+    def initialize(participants: [], track_group_chat: false)
       @participants = participants.shuffle
+      @participants << Person.new("group") if track_group_chat
     end
 
     extend Forwardable

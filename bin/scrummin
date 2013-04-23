@@ -3,7 +3,7 @@
 require "scrummin"
 
 people = ARGV.map { |a| Scrummin::Person.new(a) }
-meeting = Scrummin::Meeting.new(participants: people)
+meeting = Scrummin::Meeting.new(participants: people, track_group_chat: true)
 
 puts "starting meeting with: #{meeting.participants.map(&:name).sort.join(', ')}"
 puts "commands: (n)ext (q)uit"

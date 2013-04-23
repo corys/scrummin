@@ -67,5 +67,4 @@ When the meeting is finished, the time each participant spent will be displayed
 * Go "back" in a meeting, after "next." Sometimes a participant's turn starts,
   but a question is raised for the previous participant. That time is currently
   tracked to the wrong person.
-* Track "general" time at the end
 * End meeting stats. Total time, longest, shortest, etc.
