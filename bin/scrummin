@@ -6,13 +6,17 @@ people = ARGV.map { |a| Scrummin::Person.new(a) }
 meeting = Scrummin::Meeting.new(participants: people, track_group_chat: true)
 
 puts "starting meeting with: #{meeting.participants.map(&:name).sort.join(', ')}"
-puts "commands: (n)ext (q)uit"
+puts "commands: (a)dd (n)ext (q)uit"
 
 meeting.start
 
 while meeting.active?
   print "> "
   case $stdin.gets.chomp
+  when "a", "add"
+    print "enter name> "
+    name = $stdin.gets.chomp
+    meeting << Scrummin::Person.new(name)
   when "n", "next"
     if person = meeting.next
       puts person.name

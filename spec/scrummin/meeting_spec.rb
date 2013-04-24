@@ -23,6 +23,13 @@ module Scrummin
       meeting.participants.should include sally
     end
 
+    it "inserts new participants before the group" do
+      meeting = Meeting.new(participants: [bob], track_group_chat: true)
+      meeting << sally
+      meeting.participants.should include sally
+      meeting.participants.last.should_not == sally
+    end
+
     it "can delete participants" do
       meeting = Meeting.new(participants: [sally])
       meeting.delete sally
@@ -67,6 +74,11 @@ module Scrummin
       meeting.next
       sally.started_at.should == started
       sally.ended_at.should == ended
+    end
+
+    it "can optional track the 'group'" do
+      meeting = Meeting.new(participants: [sally], track_group_chat: true)
+      meeting.participants.last.name.should == "group"
     end
   end
 end

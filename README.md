@@ -63,7 +63,6 @@ When the meeting is finished, the time each participant spent will be displayed
 
 ## TODO
 
-* Add participants during a meeting
 * Go "back" in a meeting, after "next." Sometimes a participant's turn starts,
   but a question is raised for the previous participant. That time is currently
   tracked to the wrong person.

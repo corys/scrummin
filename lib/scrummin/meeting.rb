@@ -5,12 +5,23 @@ module Scrummin
     attr_reader :participants, :position
 
     def initialize(participants: [], track_group_chat: false)
+      @track_group_chat = track_group_chat
       @participants = participants.shuffle
-      @participants << Person.new("group") if track_group_chat
+      @participants << Person.new("group") if track_group_chat?
     end
 
     extend Forwardable
-    def_delegators :participants, :<<, :delete, :delete_at
+    def_delegators :participants, :delete, :delete_at
+
+    def add_participant(participant)
+      if track_group_chat?
+        participants.insert(-2, participant)
+      else
+        participants << participant
+      end
+    end
+
+    alias_method :<<, :add_participant
 
     def active?
       position && position < participants.size
@@ -35,6 +46,12 @@ module Scrummin
     def start
       @position = -1
       @participants.shuffle
+    end
+
+    private
+
+    def track_group_chat?
+      !!@track_group_chat
     end
   end
 end
