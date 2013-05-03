@@ -48,10 +48,54 @@ module Scrummin
       @participants.shuffle
     end
 
+    def winner
+      @winner
+    end
+
+    def winning_target
+      @winning_target
+    end
+
+    def total_duration
+      @total_duration
+    end
+
+    def calculate_stats
+      @total_duration = get_total_duration
+      @winning_target = @total_duration/participants.length    
+      get_winner 
+    end   
+
+
     private
 
     def track_group_chat?
       !!@track_group_chat
     end
+
+    def get_total_duration
+      total_duration = 0
+      participants.each do |participant|
+        total_duration += participant.duration
+      end
+      return total_duration
+    end
+
+    def get_winner
+      if participants.length > 0
+        min_duration =  (participants[0].duration - @winning_target).abs
+        @winner = participants[0]
+
+        participants.each do |participant|
+          deviation = (participant.duration - @winning_target).abs
+          if deviation < min_duration
+              min_duration = deviation
+              @winner = participant
+          end
+        end
+
+      end
+    end
+
   end
 end

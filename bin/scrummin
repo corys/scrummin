@@ -33,3 +33,9 @@ puts
 meeting.participants.each do |participant|
   puts "#{participant.name}: #{participant.duration}s"
 end
+
+meeting.calculate_stats
+puts "--------------"
+puts "Total meeting duration: #{meeting.total_duration}s"
+puts "Winning target: #{meeting.winning_target}s"
+puts "Winner: #{meeting.winner.name}!!!"
