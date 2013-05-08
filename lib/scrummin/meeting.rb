@@ -48,8 +48,8 @@ module Scrummin
       @participants.shuffle
     end
 
-    def winner
-      @winner
+    def  winners
+      @winners
     end
 
     def winning_target
@@ -63,9 +63,8 @@ module Scrummin
     def calculate_stats
       @total_duration = get_total_duration
       @winning_target = @total_duration/participants.length    
-      get_winner 
+      get_winner
     end   
-
 
     private
 
@@ -80,21 +79,26 @@ module Scrummin
       end
       return total_duration
     end
-
+    
     def get_winner
-      if participants.length > 0
-        min_duration =  (participants[0].duration - @winning_target).abs
-        @winner = participants[0]
+        deviation_array = Array.new(participants.length)
+        @winners = Array.new()       
 
-        participants.each do |participant|
-          deviation = (participant.duration - @winning_target).abs
-          if deviation < min_duration
-              min_duration = deviation
-              @winner = participant
+        if deviation_array.length > 0
+          deviation_array = participants.sort_by { |participant| participant.deviation(@winning_target) }
+
+          place = 0
+          prev_deviation = -1
+          deviation_array.each do |participant|
+            if prev_deviation != participant.deviation(@winning_target)
+              prev_deviation = participant.deviation(@winning_target)
+              place += 1
+            end
+
+            @winners << {:place => place, :participant => participant}
           end
-        end
 
-      end
+        end      
     end
 
   end

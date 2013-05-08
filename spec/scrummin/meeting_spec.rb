@@ -107,11 +107,20 @@ module Scrummin
       sally.started_at = Time.parse("1986-01-28 16:36:00 UTC")
       sally.ended_at = Time.parse("1986-01-28 16:37:00 UTC")
       bob.started_at = Time.parse("1986-01-28 16:37:00 UTC")
-      bob.ended_at = Time.parse("1986-01-28 16:37:30 UTC")
-      siona.started_at = Time.parse("1986-01-28 16:37:30 UTC")
+      bob.ended_at = Time.parse("1986-01-28 16:42:00 UTC")
+      siona.started_at = Time.parse("1986-01-28 16:38:00 UTC")
       siona.ended_at = Time.parse("1986-01-28 16:39:00 UTC")
       meeting.calculate_stats
-      meeting.winner.should == sally
+
+      #array.sort_by does not return the same result every time
+      #meeting.winners[0][:participant].should == siona
+      meeting.winners[0][:place].should == 1
+
+      #meeting.winners[1][:participant].should == sally
+      meeting.winners[1][:place].should == 1
+
+      meeting.winners[2][:participant].should == bob
+      meeting.winners[2][:place].should == 2      
     end
 
   end
