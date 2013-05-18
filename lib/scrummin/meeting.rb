@@ -2,7 +2,7 @@ require "forwardable"
 
 module Scrummin
   class Meeting
-    attr_reader :participants, :position
+    attr_reader :participants, :position, :winners, :winning_target, :total_duration
 
     def initialize(participants: [], track_group_chat: false)
       @track_group_chat = track_group_chat
@@ -48,18 +48,6 @@ module Scrummin
       @participants.shuffle
     end
 
-    def  winners
-      @winners
-    end
-
-    def winning_target
-      @winning_target
-    end
-
-    def total_duration
-      @total_duration
-    end
-
     def calculate_stats
       @total_duration = get_total_duration
       @winning_target = @total_duration/participants.length    
@@ -73,11 +61,7 @@ module Scrummin
     end
 
     def get_total_duration
-      total_duration = 0
-      participants.each do |participant|
-        total_duration += participant.duration
-      end
-      return total_duration
+      participants.map(&:duration).inject(:+)    
     end
     
     def get_winner
