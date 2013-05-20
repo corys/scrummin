@@ -16,5 +16,10 @@ module Scrummin
         ended_at - started_at
       end
     end
+
+    def deviation(standard)
+      (self.duration - standard).abs
+    end
+
   end
 end
