@@ -30,11 +30,11 @@ end
 
 puts
 
-meeting.calculate_stats
+calculator = Scrummin::Calculator.new(meeting)
 puts "--------------"
-puts "Total meeting duration: #{meeting.total_duration}s"
-puts "Winning target: #{meeting.winning_target}s"
+puts "Total meeting duration: #{calculator.total_duration}s"
+puts "Winning target: #{calculator.winning_target}s"
 puts "--------------"
-meeting.winners.each do |winner|
+calculator.winners.each do |winner|
   puts "#{winner[:place]}: #{winner[:participant].name}, #{winner[:participant].duration}s"
 end
