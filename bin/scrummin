@@ -2,10 +2,23 @@
 
 require "scrummin"
 
-people = ARGV.map { |a| Scrummin::Person.new(a) }
+people = ARGV.reject { |a| a =~ /--/ }.map { |a| Scrummin::Person.new(a) }
 meeting = Scrummin::Meeting.new(participants: people, track_group_chat: true)
 
-puts "starting meeting with: #{meeting.participants.map(&:name).sort.join(', ')}"
+def notifier
+  @notifier ||= Scrummin::Notifier.new
+end
+
+def campfire?
+  !ARGV.include? "--no-campfire"
+end
+
+def notify(text)
+  notifier.all(text) if campfire?
+  puts text
+end
+
+notify "Starting meeting with: #{meeting.participants.map(&:name).sort.join(', ')}"
 puts "commands: (a)dd (n)ext (q)uit"
 
 meeting.start
@@ -17,6 +30,7 @@ while meeting.active?
     print "enter name> "
     name = $stdin.gets.chomp
     meeting << Scrummin::Person.new(name)
+    notify "#{name} has joined the meeting"
   when "n", "next"
     if person = meeting.next
       puts person.name
@@ -31,10 +45,17 @@ end
 puts
 
 calculator = Scrummin::Calculator.new(meeting)
-puts "--------------"
-puts "Total meeting duration: #{calculator.total_duration}s"
-puts "Winning target: #{calculator.winning_target}s"
-puts "--------------"
-calculator.winners.each do |winner|
-  puts "#{winner[:place]}: #{winner[:participant].name}, #{winner[:participant].duration}s"
+
+blob = <<BANNER
+--------------
+Total meeting duration: #{calculator.total_duration}s
+Winning target: #{calculator.winning_target}s
+--------------
+BANNER
+
+standings = calculator.winners.map do |winner|
+  "#{winner[:place]}: #{winner[:participant].name}, #{winner[:participant].duration}s"
 end
+
+blob << standings.join("\n")
+notify blob
