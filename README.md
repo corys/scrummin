@@ -53,6 +53,17 @@ When the meeting is finished, the time each participant spent will be displayed
     jim: 172.519837s
     sue: 93.095637s
 
+### Campfire
+
+Scrummin now posts information about meetings to Campfire. RDI's campfire
+location is http://resdat.campfirenow.com and the room name is *Scrummin*.
+
+For development, you probably don't want to post Campfire notifications while
+testing the tool. You can disable Campfire notifications with the
+`--no-campfire` option:
+
+    scrummin --no-campfire sally, jim, bob, joan, sue
+
 ## Contributing
 
 1. Fork it
