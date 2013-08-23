@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Scrummin::VERSION
   spec.authors       = ["Chris Thorn"]
   spec.email         = ["cthorn@resdat.com"]
-  spec.description   = "Simple tool for facilitaing SCRUM meetings"
-  spec.summary       = "Simple tool for facilitaing SCRUM meetings"
+  spec.description   = "Simple tool for facilitating SCRUM meetings"
+  spec.summary       = "Simple tool for facilitating SCRUM meetings"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
