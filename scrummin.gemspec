@@ -6,8 +6,8 @@ require 'scrummin/version'
 Gem::Specification.new do |spec|
   spec.name          = "scrummin"
   spec.version       = Scrummin::VERSION
-  spec.authors       = ["Chris Thorn"]
-  spec.email         = ["cthorn@resdat.com"]
+  spec.authors       = ["Chris Thorn", "Sonhui Lamson"]
+  spec.email         = ["oss@resdat.com"]
   spec.description   = "Simple tool for facilitating SCRUM meetings"
   spec.summary       = "Simple tool for facilitating SCRUM meetings"
   spec.license       = "MIT"
