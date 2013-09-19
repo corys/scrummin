@@ -24,34 +24,42 @@ Run the command, passing the names of the participants
 
 The meeting will start, and a list of commands will be printed
 
-    starting meeting with: bob, jim, joan, sally, sue
-    commands: (n)ext (q)uit
+    Starting meeting with: Bob, Jim, Joan, Sally, Sue, group
+    commands: (a)dd (n)ext (q)uit
     >
 
 Use the *next* command to print the name of the next participant in line.
 Continue using this command when that participant has finished, to move on to
-the next participant.
+the next participant. You can also *add* a new participant, or choose to *quit*
+scrummin.
 
     > n
-    bob
+    Sally
     > n
-    joan
+    Sue
     > n
-    sally
+    Joan
     > n
-    jim
+    Bob
     > n
-    sue
+    Jim
+    > n
+    group
     > n
     done
 
-When the meeting is finished, the time each participant spent will be displayed
+When the meeting is finished, the scrummin scores are displayed.
 
-    bob: 48.39093s
-    joan: 142.655843s
-    sally: 211.0003s
-    jim: 172.519837s
-    sue: 93.095637s
+    --------------
+    Total meeting duration: 65.405435s
+    Winning target: 10.900905833333333s
+    --------------
+    1: Joan, 10.559687s
+    2: Bob, 10.335574s
+    3: Sue, 9.551485s
+    4: Jim, 9.143617s
+    5: Sally, 8.655769s
+    6: group, 17.159303s
 
 ### Campfire
 
