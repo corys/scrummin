@@ -21,8 +21,6 @@ end
 notify "Starting meeting with: #{meeting.participants.map(&:name).sort.join(', ')}"
 puts "commands: (a)dd (n)ext (q)uit"
 
-meeting.start
-
 while meeting.active?
   print "> "
   case $stdin.gets.chomp

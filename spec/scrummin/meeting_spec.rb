@@ -37,17 +37,10 @@ module Scrummin
       meeting.participants.should_not include sally
     end
 
-    it "can delete participants by index" do
-      meeting = Meeting.new(participants: [sally, bob])
-      index = meeting.participants.index(bob)
-      meeting.delete_at(index)
-      meeting.participants.should_not include bob
-    end
-
     it "can move to next participant" do
       meeting = Meeting.new(participants: [sally, bob])
-      first = meeting.participants[0]
-      second = meeting.participants[1]
+      first = meeting.remaining[0]
+      second = meeting.remaining[1]
       meeting.next.should == first
       meeting.next.should == second
     end
