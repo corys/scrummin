@@ -5,16 +5,7 @@ require "scrummin"
 people = ARGV.reject { |a| a =~ /--/ }.map { |a| Scrummin::Person.new(a) }
 meeting = Scrummin::Meeting.new(participants: people, track_group_chat: true)
 
-def notifier
-  @notifier ||= Scrummin::Notifier.new
-end
-
-def campfire?
-  !ARGV.include? "--no-campfire"
-end
-
 def notify(text)
-  notifier.all(text) if campfire?
   puts text
 end
 
